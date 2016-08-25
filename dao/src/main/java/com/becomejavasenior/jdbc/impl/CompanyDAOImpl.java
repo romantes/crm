@@ -3,20 +3,23 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Tag;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import com.becomejavasenior.jdbc.entity.CompanyDAO;
+import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+@Repository
 public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
 
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
+    private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO company (name, phone, email, address, responsible_user_id," +
             " web, deleted, created_by_id, date_create) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -25,6 +28,8 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
     private static final String SELECT_ALL_SQL = "SELECT id, name, phone, email, address, responsible_user_id, web," +
             " created_by_id, date_create\nFROM company WHERE NOT deleted";
     private final String INSERT_COMPANY_TAG_SQL = "INSERT INTO contact_company_tag (tag_id, company_id) VALUES (?, ?)";
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     public int insert(Company company) {
@@ -34,7 +39,7 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
         }
         int id;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, company.getName());
@@ -53,7 +58,7 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
             } else {
                 throw new DatabaseException("Can't get company id from database.");
             }
-            //logger.log(Level.INFO, "INSERT NEW COMPANY " + company.toString());
+            logger.log(Level.INFO, "INSERT NEW COMPANY " + company.toString());
 
         } catch (SQLException ex) {
             //logger.log(Level.SEVERE, ex.getMessage(), ex);
@@ -73,7 +78,7 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
         if (company.getId() == 0) {
             throw new DatabaseException("company must be created before update");
         }
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
 
             statement.setString(1, company.getName());
@@ -104,7 +109,7 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
         User responsibleUser;
         User creator;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL)) {
 
@@ -144,7 +149,7 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
         User responsibleUser;
         User creator;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL + " AND id = ?")) {
 
             statement.setInt(1, id);
@@ -189,7 +194,7 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
     @Override
     public void companyTag(Company company, Tag tag) {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_COMPANY_TAG_SQL)) {
 
             statement.setInt(1, tag.getId());

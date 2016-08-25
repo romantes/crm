@@ -1,20 +1,28 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Tag;
-import com.becomejavasenior.jdbc.ConnectionPool;
 import com.becomejavasenior.jdbc.entity.TagDAO;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(value = "classpath:application-context-dao.xml")
 public class TagDAOTest {
+
+    @Autowired
+    private DataSource dataSource;
 
     private TagDAO tagDAO;
     private static final String DEFAULT_NAME = "Default Name";
@@ -33,7 +41,7 @@ public class TagDAOTest {
     @After
     public void tearDown() throws SQLException {
         if (tagTestId > 0) {
-            try (Connection connection = ConnectionPool.getConnection();
+            try (Connection connection = dataSource.getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate("DELETE FROM tag WHERE id = " + Integer.toString(tagTestId));
             } catch (SQLException e) {

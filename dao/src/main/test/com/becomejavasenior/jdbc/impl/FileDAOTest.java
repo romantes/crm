@@ -1,23 +1,30 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.ConnectionPool;
 import com.becomejavasenior.jdbc.entity.FileDAO;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(value = "classpath:application-context-dao.xml")
 public class FileDAOTest {
 
+    @Autowired
+    private DataSource dataSource;
     private static final String DEFAULT_FILENAME = "DefaultFilename.ext";
     private static final Date DEFAULT_DATE = new Timestamp(new Date().getTime());
     private final PostgresDAOFactory factory;
@@ -40,7 +47,7 @@ public class FileDAOTest {
     @After
     public void tearDown() throws SQLException {
         if (fileTestId > 0) {
-            try (Connection connection = ConnectionPool.getConnection();
+            try (Connection connection = dataSource.getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate("DELETE FROM attached_file WHERE id = " + Integer.toString(fileTestId));
             } catch (SQLException e) {

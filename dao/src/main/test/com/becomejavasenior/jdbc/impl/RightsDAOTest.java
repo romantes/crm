@@ -3,20 +3,28 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Rights;
 import com.becomejavasenior.entity.SubjectType;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.ConnectionPool;
 import com.becomejavasenior.jdbc.entity.RightsDAO;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(value = "classpath:application-context-dao.xml")
 public class RightsDAOTest {
+
+    @Autowired
+    private DataSource dataSource;
 
     private final PostgresDAOFactory factory;
     private RightsDAO rightsDAO;
@@ -38,7 +46,7 @@ public class RightsDAOTest {
     @After
     public void tearDown() throws SQLException {
         if (rightsTestId > 0) {
-            try (Connection connection = ConnectionPool.getConnection();
+            try (Connection connection = dataSource.getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate("DELETE FROM rights WHERE id = " + Integer.toString(rightsTestId));
             } catch (SQLException e) {

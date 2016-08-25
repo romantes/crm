@@ -5,18 +5,21 @@ import com.becomejavasenior.jdbc.entity.TaskDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.apache.commons.dbcp2.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
+import java.util.logging.Logger;
 
+@Repository
 public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
 
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
+    private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO task (responsible_user_id, task_type_id, created_by_id," +
             " company_id, contact_id, deal_id, period, name, deleted, date_create, status_id, date_task, time_task)\n" +
@@ -51,6 +54,8 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
     private static final String FIELD_DATE_TASK = "date_task";
     private static final String FIELD_TIME_TASK = "time_task";
 
+    @Autowired
+    DataSource dataSource;
     @Override
     public int insert(Task task) {
 
@@ -59,7 +64,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
         }
         int id;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setObject(1, task.getResponsibleUser() == null ? null : task.getResponsibleUser().getId(), Types.INTEGER);
@@ -101,7 +106,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
         if (task.getId() == 0) {
             throw new DatabaseException("task must be created before update");
         }
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
 
             statement.setInt(1, task.getResponsibleUser().getId());
@@ -131,7 +136,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
     @Override
     public List<Task> getAll() {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL)) {
             return parseResultSet(resultSet);
@@ -144,7 +149,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
     @Override
     public Task getById(int id) {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL + " AND task.id = ?")) {
 
             statement.setInt(1, id);
@@ -209,7 +214,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
 
         int id;
         ResultSet resultSet = null;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(TASK_STATUS_SELECT_SQL + " AND name = ?")) {
 
             statement.setString(1, taskStatus);
@@ -234,7 +239,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
     private int insertTaskStatus(String taskStatus) {
 
         int id;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(TASK_STATUS_INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, taskStatus);
@@ -255,7 +260,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
     public List<String> getAllTaskStatus() {
 
         List<String> statusList = new ArrayList<>();
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(TASK_STATUS_SELECT_SQL + " ORDER BY name");
              ResultSet resultSet = statement.executeQuery()) {
 
@@ -277,7 +282,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
 
         int id;
         ResultSet resultSet = null;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(TASK_TYPE_SELECT_SQL + " AND name = ?")) {
 
             statement.setString(1, taskType);
@@ -302,7 +307,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
     private int insertTaskType(String taskType) {
 
         int id;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(TASK_TYPE_INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, taskType);
@@ -323,7 +328,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
     public List<String> getAllTaskType() {
 
         List<String> typeList = new ArrayList<>();
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(TASK_TYPE_SELECT_SQL + " ORDER BY name");
              ResultSet resultSet = statement.executeQuery()) {
 
@@ -341,7 +346,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
 
         Map<Integer, String> taskTypes = new HashMap<>();
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(TASK_TYPE_SELECT_SQL)) {
 

@@ -2,20 +2,23 @@ package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Language;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import com.becomejavasenior.jdbc.entity.UserDAO;
+import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+@Repository
 public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
+    private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO \"user\" (name, email, password, is_admin, phone, " +
             "mobile_phone, note, deleted, url, image, language_id) VALUES (?, ?, ?, ?, ?, ?, ?, FALSE, ?, ?, ?)";
@@ -23,6 +26,9 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
             " mobile_phone = ?, note = ?, deleted = ?, image = ?, url = ?, language_id = ? WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT id, name, email, password, is_admin, phone, mobile_phone," +
             " note, image, url, language_id FROM \"user\" WHERE NOT deleted";
+
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     public int insert(User user) {
@@ -32,9 +38,9 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
         }
         int id;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
-
+            logger.log(Level.INFO, connection.toString());
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
@@ -52,10 +58,10 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
             } else {
                 throw new DatabaseException("Can't get user id from database.");
             }
-            //logger.log(Level.INFO, "INSERT NEW USER " + user.toString());
+            logger.log(Level.INFO, "INSERT NEW USER " + user.toString());
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return id;
@@ -72,7 +78,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
         if (user.getId() == 0) {
             throw new DatabaseException("user must be created before update");
         }
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
 
             statement.setString(1, user.getName());
@@ -100,7 +106,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
     @Override
     public List<User> getAll() {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL)) {
             return parseResultSet(resultSet);
@@ -114,7 +120,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
     public User getById(int id) {
 
         ResultSet resultSet = null;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL + " AND id = ?")) {
 
             statement.setInt(1, id);
