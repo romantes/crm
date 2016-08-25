@@ -4,10 +4,8 @@ import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.FileDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +23,6 @@ public class FileDAOImpl extends AbstractDAO<File> implements FileDAO {
     private static final String SELECT_ALL_SQL = "SELECT id, created_by_id, date_create, filename, filesize," +
             " url_file, file, contact_id, company_id, deal_id FROM attached_file WHERE NOT deleted";
 
-    @Autowired
-    private DataSource dataSource;
 
     @Override
     public int insert(File file) {

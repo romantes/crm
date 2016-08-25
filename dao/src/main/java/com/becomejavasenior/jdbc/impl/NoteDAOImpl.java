@@ -3,12 +3,9 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.NoteDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.apache.commons.dbcp2.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +23,6 @@ public class NoteDAOImpl extends AbstractDAO<Note> implements NoteDAO {
             " deal_id = ?, company_id = ?, contact_id = ? WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT id, note, created_by_id, date_create, deal_id, company_id, contact_id\n" +
             "FROM note WHERE NOT deleted";
-    @Autowired
-    DataSource dataSource;
 
     @Override
     public int insert(Note note) {

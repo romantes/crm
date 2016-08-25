@@ -3,12 +3,9 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Stage;
 import com.becomejavasenior.jdbc.entity.StageDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.apache.commons.dbcp2.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +20,6 @@ public class StageDAOImpl extends AbstractDAO<Stage> implements StageDAO {
     private static final String TABLE_NAME = "stage_deals";
 
     private final String className = getClass().getSimpleName().concat(": ");
-
-    @Autowired
-    DataSource dataSource;
 
     @Override
     public int insert(Stage stage) {

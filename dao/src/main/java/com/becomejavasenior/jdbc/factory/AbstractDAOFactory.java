@@ -2,7 +2,7 @@ package com.becomejavasenior.jdbc.factory;
 
 import com.becomejavasenior.jdbc.entity.*;
 
-public abstract class AbstractDAOFactory {
+public abstract class AbstractDAOFactory  {
 
     public static final int POSTGRESQL = 1;
 

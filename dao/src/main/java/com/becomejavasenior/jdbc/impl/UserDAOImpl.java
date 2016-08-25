@@ -5,10 +5,8 @@ import com.becomejavasenior.entity.User;
 import com.becomejavasenior.jdbc.entity.UserDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +25,6 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
     private static final String SELECT_ALL_SQL = "SELECT id, name, email, password, is_admin, phone, mobile_phone," +
             " note, image, url, language_id FROM \"user\" WHERE NOT deleted";
 
-    @Autowired
-    private DataSource dataSource;
 
     @Override
     public int insert(User user) {

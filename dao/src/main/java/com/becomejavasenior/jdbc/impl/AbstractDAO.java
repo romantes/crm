@@ -26,7 +26,7 @@ abstract class AbstractDAO<T> implements GenericDAO<T> {
     static final String FIELD_NAME = "name";
 
     @Autowired
-    private DataSource dataSource;
+    protected DataSource dataSource;
 
     @Override
     abstract public int insert(T o);

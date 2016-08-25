@@ -5,10 +5,8 @@ import com.becomejavasenior.entity.SubjectType;
 import com.becomejavasenior.entity.User;
 import com.becomejavasenior.jdbc.entity.RightsDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +34,6 @@ public class RightsDAOImpl extends AbstractDAO<Rights> implements RightsDAO {
     private static final String TABLE_NAME = "rights";
 
     private final String className = getClass().getSimpleName().concat(": ");
-
-    @Autowired
-    private DataSource dataSource;
 
     @Override
     public int insert(Rights rights) {

@@ -4,10 +4,8 @@ import com.becomejavasenior.entity.User;
 import com.becomejavasenior.entity.VisitHistory;
 import com.becomejavasenior.jdbc.entity.VisitHistoryDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +27,6 @@ public class VisitHistoryDAOImpl extends AbstractDAO<VisitHistory> implements Vi
     private static final String FIELD_BROWSER = "browser";
 
     private final String className = getClass().getSimpleName().concat(": ");
-
-    @Autowired
-    private DataSource dataSource;
 
 
     @Override

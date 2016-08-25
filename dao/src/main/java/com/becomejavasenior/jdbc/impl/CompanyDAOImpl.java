@@ -6,10 +6,8 @@ import com.becomejavasenior.entity.User;
 import com.becomejavasenior.jdbc.entity.CompanyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +26,6 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
     private static final String SELECT_ALL_SQL = "SELECT id, name, phone, email, address, responsible_user_id, web," +
             " created_by_id, date_create\nFROM company WHERE NOT deleted";
     private final String INSERT_COMPANY_TAG_SQL = "INSERT INTO contact_company_tag (tag_id, company_id) VALUES (?, ?)";
-    @Autowired
-    private DataSource dataSource;
 
     @Override
     public int insert(Company company) {

@@ -4,11 +4,8 @@ import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.ContactDAO;
 import com.becomejavasenior.jdbc.entity.TagDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +34,6 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
     private static final String FIELD_CREATED_BY_ID = "created_by_id";
     private static final String FIELD_COMPANY_ID = "company_id";
     private static final String FIELD_COMPANY_NAME = "company_name";
-
-    @Autowired
-    private DataSource dataSource;
 
     @Override
     public int insert(Contact contact) {

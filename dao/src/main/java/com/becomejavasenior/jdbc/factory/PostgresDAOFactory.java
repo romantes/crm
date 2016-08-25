@@ -2,75 +2,79 @@ package com.becomejavasenior.jdbc.factory;
 
 import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.impl.*;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class PostgresDAOFactory extends AbstractDAOFactory {
 
 //    public static Connection getConnection() throws SQLException {
 //        return ConnectionPool.getConnection();
 //    }
+    private AbstractApplicationContext context =
+        new ClassPathXmlApplicationContext("application-context-dao.xml");
 
     @Override
     public CompanyDAO getCompanyDAO() {
-        return new CompanyDAOImpl();
+        return context.getBean(CompanyDAOImpl.class);
     }
 
     @Override
     public ContactDAO getContactDAO() {
-        return new ContactDAOImpl();
+        return context.getBean(ContactDAOImpl.class);
     }
 
     @Override
     public DealDAO getDealDAO() {
-        return new DealDAOImpl();
+        return context.getBean(DealDAOImpl.class);
     }
 
     @Override
     public FileDAO getFileDAO() {
-        return new FileDAOImpl();
+        return context.getBean(FileDAOImpl.class);
     }
 
     @Override
     public NoteDAO getNoteDAO() {
-        return new NoteDAOImpl();
+        return context.getBean(NoteDAOImpl.class);
     }
 
     @Override
     public TaskDAO getTaskDAO() {
-        return new TaskDAOImpl();
+        return context.getBean(TaskDAOImpl.class);
     }
 
     @Override
     public UserDAO getUserDAO() {
-        return new UserDAOImpl();
+        return context.getBean(UserDAOImpl.class);
     }
 
     @Override
     public StageDAO getStageDAO() {
-        return new StageDAOImpl();
+        return context.getBean(StageDAOImpl.class);
     }
 
     @Override
     public LanguageDAO getLanguageDAO() {
-        return new LanguageDAOImpl();
+        return context.getBean(LanguageDAOImpl.class);
     }
 
     @Override
     public TagDAO getTagDAO() {
-        return new TagDAOImpl();
+        return context.getBean(TagDAOImpl.class);
     }
 
     @Override
     public CurrencyDAO getCurrencyDAO() {
-        return new CurrencyDAOImpl();
+        return context.getBean(CurrencyDAOImpl.class);
     }
 
     @Override
     public RightsDAO getRightsDAO() {
-        return new RightsDAOImpl();
+        return context.getBean(RightsDAOImpl.class);
     }
 
     @Override
     public VisitHistoryDAO getVisitHistoryDAO() {
-        return new VisitHistoryDAOImpl();
+        return context.getBean(VisitHistoryDAOImpl.class);
     }
 }

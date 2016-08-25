@@ -5,11 +5,8 @@ import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.Tag;
 import com.becomejavasenior.jdbc.entity.TagDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +24,6 @@ public class TagDAOImpl extends AbstractDAO<Tag> implements TagDAO {
     private static final String TABLE_NAME = "tag";
 
     private final String className = getClass().getSimpleName().concat(": ");
-
-    @Autowired
-    DataSource dataSource;
 
     @Override
     public int insert(Tag tag) {

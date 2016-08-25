@@ -3,12 +3,9 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.TaskDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.apache.commons.dbcp2.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,8 +51,6 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
     private static final String FIELD_DATE_TASK = "date_task";
     private static final String FIELD_TIME_TASK = "time_task";
 
-    @Autowired
-    DataSource dataSource;
     @Override
     public int insert(Task task) {
 

@@ -3,10 +3,8 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Currency;
 import com.becomejavasenior.jdbc.entity.CurrencyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +20,6 @@ public class CurrencyDAOImpl extends AbstractDAO<Currency> implements CurrencyDA
 
     private static final String TABLE_NAME = "currency";
     private final String className = getClass().getSimpleName().concat(": ");
-
-    @Autowired
-    private DataSource dataSource;
 
     @Override
     public int insert(Currency currency) {

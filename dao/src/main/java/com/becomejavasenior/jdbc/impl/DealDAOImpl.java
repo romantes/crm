@@ -4,10 +4,8 @@ import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.DealDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,9 +55,6 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
             "  JOIN stage_deals ON deal.stage_id = stage_deals.id\n" +
             "  JOIN contact ON deal.primary_contact_id = contact.id\n" +
             "  JOIN company ON contact.company_id = company.id\n";
-
-    @Autowired
-    private DataSource dataSource;
 
     @Override
     public List<Deal> getDealsForList() {

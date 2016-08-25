@@ -3,10 +3,8 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Language;
 import com.becomejavasenior.jdbc.entity.LanguageDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +21,6 @@ public class LanguageDAOImpl extends AbstractDAO<Language> implements LanguageDA
 
     private static final String TABLE_NAME = "language";
     private final String className = getClass().getSimpleName().concat(": ");
-
-    @Autowired
-    private DataSource dataSource;
 
     @Override
     public final int insert(Language language) {
