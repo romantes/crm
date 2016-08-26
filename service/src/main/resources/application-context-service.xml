@@ -8,4 +8,30 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.becomejavasenior.service.impl"/>
 
+    <bean id="userServiceStaticFactory" class="com.becomejavasenior.service.factory.UserServiceStaticFactoryBeanInst"
+          factory-method="createInstance"
+    />
+
+    <bean id="dealServiceStaticFactory" class="com.becomejavasenior.service.factory.DealServiceStaticFactoryBeanInst"
+          factory-method="createInstance"
+    />
+
+    <bean id="companyServiceFactory" class="com.becomejavasenior.service.factory.CompanyServiceFactoryBeanInst"
+    />
+
+    <bean id="contactServiceFactory" class="com.becomejavasenior.service.factory.ContactServiceFactoryBeanInst"
+    />
+
+    <bean id="companyServiceLocator"
+          factory-bean="companyServiceFactory"
+          factory-method="createInstance"
+          lazy-init="true"
+    />
+
+    <bean id="contactServiceLocator"
+          factory-bean="companyServiceFactory"
+          factory-method="createInstance"
+          lazy-init="true"
+    />
+
 </beans>
