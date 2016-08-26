@@ -1,12 +1,14 @@
 package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.entity.File;
 import com.becomejavasenior.service.CompanyService;
-import com.becomejavasenior.service.impl.CompanyServiceImpl;
 import com.google.common.base.Splitter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +16,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.*;
-
+@Controller
 @WebServlet(name = "companyServlet", urlPatterns = "/company")
 @MultipartConfig
 public class CompanyServlet extends HttpServlet {
-    private CompanyService companyService = new CompanyServiceImpl();
+
+    @Autowired
+    private CompanyService companyService;
+
+    public void init(ServletConfig config) {
+        try {
+            super.init(config);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+                config.getServletContext());
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

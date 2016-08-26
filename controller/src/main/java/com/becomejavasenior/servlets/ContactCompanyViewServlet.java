@@ -3,10 +3,13 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.service.ContactService;
-import com.becomejavasenior.service.impl.ContactServiceImpl;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,12 +18,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+@Controller
 @WebServlet(name = "contactCompanyViewServlet", urlPatterns = "/viewcompanies")
 public class ContactCompanyViewServlet extends HttpServlet {
 
+    @Autowired
+    private ContactService contactService;
+
+    public void init(ServletConfig config) {
+        try {
+            super.init(config);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+                config.getServletContext());
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ContactService contactService = new ContactServiceImpl();
 
         List<Company> companyList = contactService.getCompanyList();
         companyList.sort((Company company1, Company company2) -> company1.getName().compareTo(company2.getName()));

@@ -8,29 +8,16 @@ import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.impl.LanguageDAOImpl;
 import com.becomejavasenior.service.UserService;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+
 public class UserServiceImpl implements UserService {
 
     private UserDAO userDAO;
     private LanguageDAO languageDAO;
-
-    //  TODO construction do not initialize class fields what can cause NPE
-    public UserServiceImpl() {
-
-    }
-
-    @Autowired
-    public UserServiceImpl(UserDAO userDAO, LanguageDAO languageDAO) {
-        this.userDAO = userDAO;
-        this.languageDAO = languageDAO;
-    }
 
     @Override
     public List<Language> getLanguageList() {

@@ -5,10 +5,8 @@ import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.impl.*;
 import com.becomejavasenior.service.ContactService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
@@ -20,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Service
 public class ContactServiceImpl implements ContactService {
 
     private static final String STR_0 = "0";
@@ -60,16 +57,6 @@ public class ContactServiceImpl implements ContactService {
             new ClassPathXmlApplicationContext("application-context-service.xml");
 
     //  TODO construction do not initialize class fields what can cause NPE
-    public ContactServiceImpl() {
-
-    }
-
-    @Autowired
-    public ContactServiceImpl(ContactDAO contactDAO) {
-        currentUser = new User();
-        currentUser.setId(1);
-        this.contactDAO = contactDAO;
-    }
 
     @Override
     public int insert(Contact contact) {

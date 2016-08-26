@@ -1,8 +1,12 @@
 package com.becomejavasenior.servlets;
 
-import com.becomejavasenior.service.impl.UserServiceImpl;
+import com.becomejavasenior.service.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +14,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Controller
 @WebServlet(name = "RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
 
     private static final String URL_REGISTER = "/pages/authRegister.jsp";
+    @Autowired
+    private UserService userService;
+
+    public void init(ServletConfig config) {
+        try {
+            super.init(config);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+                config.getServletContext());
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
-            req.setAttribute("languageList", new UserServiceImpl().getLanguageList());
+            req.setAttribute("languageList", userService.getLanguageList());
             req.getRequestDispatcher(URL_REGISTER).forward(req, resp);
 
         } catch (ServletException | IOException e) {
@@ -30,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String serviceMessage = new UserServiceImpl().createNewUser(
+        String serviceMessage = userService.createNewUser(
                 req.getParameter("name"), req.getParameter("password"),
                 req.getParameter("email"), Integer.parseInt(req.getParameter("language")));
 
