@@ -2,21 +2,47 @@ package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.*;
-import com.becomejavasenior.jdbc.factory.AbstractDAOFactory;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import com.becomejavasenior.service.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+@Service
 public class CompanyServiceImpl implements CompanyService {
-    private final CompanyDAO companyDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getCompanyDAO();
-    private final UserDAO userDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getUserDAO();
-    private final ContactDAO contactDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getContactDAO();
-    private final TaskDAO taskDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTaskDAO();
-    private final DealDAO dealDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getDealDAO();
-    private final NoteDAO noteDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getNoteDAO();
-    private final TagDAO tagDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTagDAO();
-    private final FileDAO fileDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getFileDAO();
+    private CompanyDAO companyDAO;
+    private UserDAO userDAO;
+    private ContactDAO contactDAO;
+    private TaskDAO taskDAO;
+    private DealDAO dealDAO;
+    private NoteDAO noteDAO;
+    private TagDAO tagDAO;
+    private FileDAO fileDAO;
+//  TODO construction do not initialize class fields what can cause NPE
+    public CompanyServiceImpl() {
+
+    }
+
+    @Autowired
+    public CompanyServiceImpl(CompanyDAO companyDAO,
+                              UserDAO userDAO,
+                              ContactDAO contactDAO,
+                              TaskDAO taskDAO,
+                              DealDAO dealDAO,
+                              NoteDAO noteDAO,
+                              TagDAO tagDAO,
+                              FileDAO fileDAO) {
+        this.companyDAO = companyDAO;
+        this.userDAO = userDAO;
+        this.contactDAO = contactDAO;
+        this.taskDAO = taskDAO;
+        this.dealDAO = dealDAO;
+        this.noteDAO = noteDAO;
+        this.tagDAO = tagDAO;
+        this.fileDAO = fileDAO;
+    }
 
     @Override
     public int insert(Company company) {

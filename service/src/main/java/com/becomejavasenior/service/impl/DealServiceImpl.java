@@ -4,15 +4,28 @@ import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.Deal;
 import com.becomejavasenior.entity.Stage;
 import com.becomejavasenior.jdbc.entity.DealDAO;
-import com.becomejavasenior.jdbc.impl.DealDAOImpl;
 import com.becomejavasenior.service.DealService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DealServiceImpl implements DealService {
 
-    private DealDAO dealDao = new DealDAOImpl();
-    private Deal deal = new Deal();
+    private DealDAO dealDao;
+    private Deal deal;
+
+    //  TODO construction do not initialize class fields what can cause NPE
+    public DealServiceImpl() {
+
+    }
+
+    @Autowired
+    public DealServiceImpl(DealDAO dealDAO) {
+        this.dealDao = dealDao;
+        this.deal = new Deal();
+    }
 
     @Override
     public int insert(Deal deal) {
