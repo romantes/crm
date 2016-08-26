@@ -17,6 +17,8 @@
     />
 
     <bean id="companyServiceFactory" class="com.becomejavasenior.service.factory.CompanyServiceFactoryBeanInst"
+        init-method="init"
+        destroy-method="destroy"
     />
 
     <bean id="contactServiceFactory" class="com.becomejavasenior.service.factory.ContactServiceFactoryBeanInst"
@@ -28,7 +30,7 @@
           lazy-init="true"
     />
 
-    <bean id="contactServiceLocator"
+    <bean id="contactServiceLocator" scope="prototype"
           factory-bean="companyServiceFactory"
           factory-method="createInstance"
           lazy-init="true"
