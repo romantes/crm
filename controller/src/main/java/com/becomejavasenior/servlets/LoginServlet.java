@@ -24,7 +24,6 @@ public class LoginServlet extends HttpServlet {
     //here can be null pointer exception
     private  Map<String, User> userMap;
 
-
     @Override
     public void init(ServletConfig config) {
         try {
