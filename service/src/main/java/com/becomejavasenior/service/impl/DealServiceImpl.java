@@ -5,12 +5,14 @@ import com.becomejavasenior.entity.Deal;
 import com.becomejavasenior.entity.Stage;
 import com.becomejavasenior.jdbc.entity.DealDAO;
 import com.becomejavasenior.service.DealService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 
 public class DealServiceImpl implements DealService {
 
+    @Autowired
     private DealDAO dealDao;
     private Deal deal;
 

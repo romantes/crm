@@ -30,7 +30,7 @@
           lazy-init="true"
     />
 
-    <bean id="contactServiceLocator" scope="prototype"
+    <bean id="contactServiceLocator"
           factory-bean="contactServiceFactory"
           factory-method="createInstance"
           lazy-init="true"

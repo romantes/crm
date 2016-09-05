@@ -3,6 +3,7 @@ package com.becomejavasenior.service.impl;
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.service.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,15 +11,23 @@ import java.util.List;
 import java.util.Map;
 
 public class CompanyServiceImpl implements CompanyService {
+
+    @Autowired
     private CompanyDAO companyDAO;
+    @Autowired
     private UserDAO userDAO;
+    @Autowired
     private ContactDAO contactDAO;
+    @Autowired
     private TaskDAO taskDAO;
+    @Autowired
     private DealDAO dealDAO;
+    @Autowired
     private NoteDAO noteDAO;
+    @Autowired
     private TagDAO tagDAO;
+    @Autowired
     private FileDAO fileDAO;
-//  TODO construction do not initialize class fields what can cause NPE
 
     @Override
     public int insert(Company company) {

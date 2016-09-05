@@ -8,6 +8,7 @@ import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.impl.LanguageDAOImpl;
 import com.becomejavasenior.service.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,9 @@ import java.util.Map;
 
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private UserDAO userDAO;
+    @Autowired
     private LanguageDAO languageDAO;
 
     @Override

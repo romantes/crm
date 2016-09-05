@@ -21,8 +21,7 @@ public class LoginServlet extends HttpServlet {
 
     @Autowired
     private UserService userService;
-    //here can be null pointer exception
-    private  Map<String, User> userMap;
+
 
     @Override
     public void init(ServletConfig config) {
@@ -37,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+        Map<String, User> userMap = null;
         try {
             if (req.getParameter("updateUsers") != null) {
                 userMap = userService.getUserMap();
@@ -63,6 +62,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         if (email != null && !email.isEmpty() && password != null) {
+            Map<String, User> userMap = userService.getUserMap();
             user = userMap.get(email);
         }
 

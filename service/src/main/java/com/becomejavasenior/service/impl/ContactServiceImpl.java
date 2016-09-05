@@ -5,8 +5,7 @@ import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.impl.*;
 import com.becomejavasenior.service.ContactService;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
@@ -51,10 +50,22 @@ public class ContactServiceImpl implements ContactService {
     private static final String TASK_TEXT = "task_text";
     private static final String TASK_STATUS_NEW = "В работе";
 
+    @Autowired
     private ContactDAO contactDAO;
+    @Autowired
+    private TagDAO tagDAO;
+    @Autowired
+    private StageDAO stageDAO;
+    @Autowired
+    private UserDAO userDAO;
+    @Autowired
+    private CompanyDAO companyDAO;
+    @Autowired
+    private TaskDAO taskDAO;
+
+
+
     private User currentUser;
-    private AbstractApplicationContext context =
-            new ClassPathXmlApplicationContext("application-context-service.xml");
 
     //  TODO construction do not initialize class fields what can cause NPE
 
@@ -85,22 +96,22 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List<User> getUserList() {
-        return new UserDAOImpl().getAll();
+        return userDAO.getAll();
     }
 
     @Override
     public List<Company> getCompanyList() {
-        return new CompanyDAOImpl().getAll();
+        return companyDAO.getAll();
     }
 
     @Override
     public List<Stage> getStageList() {
-        return context.getBean(StageDAOImpl.class).getAll();
+        return stageDAO.getAll();
     }
 
     @Override
     public List<String> getTaskTypesList() {
-        return context.getBean(TaskDAOImpl.class).getAllTaskType();
+        return taskDAO.getAllTaskType();
     }
 
     @Override
@@ -115,7 +126,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List<Tag> getTagList() {
-        return context.getBean(TagDAOImpl.class).getAll();
+        return tagDAO.getAll();
     }
 
     @Override
