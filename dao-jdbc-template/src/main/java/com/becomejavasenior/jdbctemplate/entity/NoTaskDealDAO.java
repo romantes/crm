@@ -5,7 +5,7 @@ import java.math.BigInteger;
 /**
  * Created by apple on 9/6/16.
  */
-public interface CompletedDealDAO {
-    BigInteger getTotalCompletedNum();
-    BigInteger getTotalIncomletedNum();
+public interface NoTaskDealDAO {
+    BigInteger getTotalNoTaskNum();
+    BigInteger getTotalWithTaskNum();
 }
