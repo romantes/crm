@@ -28,7 +28,7 @@ public class CompanyServiceImpl implements CompanyService {
     private TagDAO tagDAO;
     @Autowired
     private FileDAO fileDAO;
-//fuck'em and their low;
+
     @Override
     public int insert(Company company) {
         return companyDAO.insert(company);
