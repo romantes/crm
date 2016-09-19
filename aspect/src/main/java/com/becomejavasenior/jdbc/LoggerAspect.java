@@ -21,23 +21,15 @@ public class LoggerAspect {
     private void logDaoCall(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         Object[] methodArgs = joinPoint.getArgs();
-        log.trace("Method: " + methodName + "Method arguments: " + methodArgs.toString());
+        log.trace("Method: " + methodName + "Method arguments: " + methodArgs + " ..Was successful ");
     }
 
     @AfterThrowing(value=POINTCUT, throwing="exception")
     private void logExeptionDaoCall(JoinPoint joinPoint, Exception exception) {
         String methodName = joinPoint.getSignature().getName();
-        Object[] methodArgs = joinPoint.getArgs();
-        errLog.error("Method: " + methodName + "Method arguments: " + methodArgs.toString());
+        String methodArgs = joinPoint.getArgs().toString();
+        errLog.warn("Method: " + methodName + "Method arguments: " + methodArgs + " ..Was unsuccessful ");
     }
 
-    private String parseMethodArgs(Object [] args) {
-        String result = "";
-        for (Object o : args) {
-            result += o.toString();
-                    result += " ";
-        }
-        return result;
-    }
 
 }

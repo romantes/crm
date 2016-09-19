@@ -1,8 +1,6 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.jdbc.entity.*;
-import com.becomejavasenior.jdbc.entity.DealDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,25 +28,28 @@ public class DealDAOTest {
     @Autowired
     private DataSource dataSource;
 
-    private final PostgresDAOFactory factory;
+    @Autowired
     private DealDAO dealDAO;
+    @Autowired
+    private UserDAO userDAO;
+    @Autowired
+    private StageDAO stageDAO;
+    @Autowired
+    private CompanyDAO companyDAO;
+    @Autowired
+    private ContactDAO contactDAO;
+
     private User userForDealTest;
     private Stage stageForDealTest;
     private Company companyForDealTest;
     private int dealTestId;
 
-
-    public DealDAOTest() {
-        factory = new PostgresDAOFactory();
-        userForDealTest = factory.getUserDAO().getById(1);
-        stageForDealTest = factory.getStageDAO().getById(1);
-        companyForDealTest = factory.getCompanyDAO().getById(1);
-        dealDAO = factory.getDealDAO();
-    }
-
     @Before
     public void setUp() {
         dealTestId = 0;
+        userForDealTest = userDAO.getById(1);
+        stageForDealTest = stageDAO.getById(1);
+        companyForDealTest = companyDAO.getById(1);
     }
 
     @After
@@ -99,10 +100,10 @@ public class DealDAOTest {
     public void testUpdate() throws SQLException {
         String updatedName = "Updated Name";
         Timestamp updatedCreateDate = new Timestamp(1L << 41);
-        User updatedUser = factory.getUserDAO().getById(2);
-        Company updatedCompany = factory.getCompanyDAO().getById(2);
-        Stage updatedStage = factory.getStageDAO().getById(2);
-        Contact updatedContact = factory.getContactDAO().getById(2);
+        User updatedUser = userDAO.getById(2);
+        Company updatedCompany = companyDAO.getById(2);
+        Stage updatedStage = stageDAO.getById(2);
+        Contact updatedContact = contactDAO.getById(2);
 
         Deal dealTest = new Deal();
         dealTest.setName(DEFAULT_NAME);
