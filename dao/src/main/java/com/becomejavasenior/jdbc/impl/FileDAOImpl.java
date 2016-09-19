@@ -9,12 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Repository
 public class FileDAOImpl extends AbstractDAO<File> implements FileDAO {
 
-    private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO attached_file (created_by_id, date_create, filename, filesize, deleted," +
             " url_file, file, contact_id, company_id, deal_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -52,10 +50,10 @@ public class FileDAOImpl extends AbstractDAO<File> implements FileDAO {
             } else {
                 throw new DatabaseException("Can't get file id from database.");
             }
-            //logger.log(Level.INFO, "INSERT NEW FILE " + file.toString());
+
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
+
             throw new DatabaseException(ex);
         }
         return id;

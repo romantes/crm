@@ -11,11 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 @Repository
 public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
-
-    private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO deal (stage_id, responsible_user_id, company_id, created_by_id, " +
             "name, amount, deleted, date_create, primary_contact_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -90,7 +87,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
                 deals.add(deal);
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
+
             throw new DatabaseException(ex);
         }
 
