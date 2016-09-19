@@ -1,6 +1,6 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.Language;
+import com.becomejavasenior.jdbc.entity.Language;
 import com.becomejavasenior.jdbc.entity.LanguageDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.User;
-import com.becomejavasenior.entity.VisitHistory;
+import com.becomejavasenior.jdbc.entity.User;
+import com.becomejavasenior.jdbc.entity.VisitHistory;
 import com.becomejavasenior.jdbc.entity.VisitHistoryDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.stereotype.Repository;

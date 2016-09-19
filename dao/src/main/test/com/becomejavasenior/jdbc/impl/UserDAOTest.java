@@ -1,9 +1,9 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.Language;
-import com.becomejavasenior.entity.User;
+import com.becomejavasenior.jdbc.entity.Language;
+import com.becomejavasenior.jdbc.entity.User;
 import com.becomejavasenior.jdbc.entity.UserDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import com.becomejavasenior.jdbc.entity.LanguageDAO;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -29,20 +29,18 @@ public class UserDAOTest {
     @Autowired
     private DataSource dataSource;
 
-    private final PostgresDAOFactory factory;
+    @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    private LanguageDAO languageDAO;
     private Language defaultLanguage;
     private int userTestId;
-
-    public UserDAOTest() {
-        factory = new PostgresDAOFactory();
-        defaultLanguage = factory.getLanguageDAO().getById(1);
-        userDAO = factory.getUserDAO();
-    }
 
     @Before
     public void setUp() {
         userTestId = 0;
+        defaultLanguage = languageDAO.getById(1);
     }
 
     @After
@@ -91,7 +89,7 @@ public class UserDAOTest {
         String updatedName = "Updated Name";
         String updatedEmail = "updated@email.org";
         String updatedPassword = "UpdatedPassWord_13";
-        Language updatedLanguage = factory.getLanguageDAO().getById(2);
+        Language updatedLanguage = languageDAO.getById(2);
         String updatedPhone = "UpdatedPhone 345-67-89";
         String updatedMobilePhone = "UpdatedMobilePhone 567-89-01";
         String updatedNote = "This is short story\nabout\tUSER";

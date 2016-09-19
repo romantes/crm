@@ -1,6 +1,6 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.Currency;
+import com.becomejavasenior.jdbc.entity.Currency;
 import com.becomejavasenior.jdbc.entity.CurrencyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.stereotype.Repository;

@@ -1,8 +1,8 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.Tag;
-import com.becomejavasenior.jdbc.entity.TagDAO;
+import com.becomejavasenior.jdbc.entity.Tag;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import com.becomejavasenior.jdbc.entity.TagDAO;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

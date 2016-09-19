@@ -1,6 +1,6 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.*;
+import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.entity.NoteDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;

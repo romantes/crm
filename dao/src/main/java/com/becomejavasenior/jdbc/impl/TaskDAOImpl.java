@@ -1,8 +1,8 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.entity.TaskDAO;
+import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
+import com.becomejavasenior.jdbc.entity.TaskDAO;
 import org.apache.commons.dbcp2.Utils;
 import org.springframework.stereotype.Repository;
 

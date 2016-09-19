@@ -6,22 +6,22 @@
     <import resource="classpath:/application-context-dao.xml"/>
 
     <context:annotation-config/>
-    <context:component-scan base-package="com.becomejavasenior.service.impl"/>
+    <context:component-scan base-package="com.becomejavasenior.jdbc.service.impl"/>
 
-    <bean id="userServiceStaticFactory" class="com.becomejavasenior.service.factory.UserServiceStaticFactoryBeanInst"
+    <bean id="userServiceStaticFactory" class="com.becomejavasenior.jdbc.service.factory.UserServiceStaticFactoryBeanInst"
           factory-method="createInstance"
     />
 
-    <bean id="dealServiceStaticFactory" class="com.becomejavasenior.service.factory.DealServiceStaticFactoryBeanInst"
+    <bean id="dealServiceStaticFactory" class="com.becomejavasenior.jdbc.service.factory.DealServiceStaticFactoryBeanInst"
           factory-method="createInstance"
     />
 
-    <bean id="companyServiceFactory" class="com.becomejavasenior.service.factory.CompanyServiceFactoryBeanInst"
+    <bean id="companyServiceFactory" class="com.becomejavasenior.jdbc.service.factory.CompanyServiceFactoryBeanInst"
         init-method="init"
         destroy-method="destroy"
     />
 
-    <bean id="contactServiceFactory" class="com.becomejavasenior.service.factory.ContactServiceFactoryBeanInst"
+    <bean id="contactServiceFactory" class="com.becomejavasenior.jdbc.service.factory.ContactServiceFactoryBeanInst"
     />
 
     <bean id="companyServiceLocator"

@@ -1,9 +1,8 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.Company;
-import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.ConnectionPool;
+import com.becomejavasenior.jdbc.entity.Company;
 import com.becomejavasenior.jdbc.entity.CompanyDAO;
+import com.becomejavasenior.jdbc.entity.User;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;
 import org.junit.Assert;

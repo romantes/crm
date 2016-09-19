@@ -1,8 +1,8 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.Rights;
-import com.becomejavasenior.entity.SubjectType;
-import com.becomejavasenior.entity.User;
+import com.becomejavasenior.jdbc.entity.Rights;
+import com.becomejavasenior.jdbc.entity.SubjectType;
+import com.becomejavasenior.jdbc.entity.User;
 import com.becomejavasenior.jdbc.entity.RightsDAO;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;

@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.jdbc.entity.GenericDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
+import com.becomejavasenior.jdbc.entity.GenericDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;

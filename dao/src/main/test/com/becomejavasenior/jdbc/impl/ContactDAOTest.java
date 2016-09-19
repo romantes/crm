@@ -1,9 +1,6 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.Company;
-import com.becomejavasenior.entity.Contact;
-import com.becomejavasenior.entity.TypeOfPhone;
-import com.becomejavasenior.entity.User;
+import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.entity.ContactDAO;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;

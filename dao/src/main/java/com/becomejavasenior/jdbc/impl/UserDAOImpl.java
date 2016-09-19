@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.Language;
-import com.becomejavasenior.entity.User;
+import com.becomejavasenior.jdbc.entity.Language;
+import com.becomejavasenior.jdbc.entity.User;
 import com.becomejavasenior.jdbc.entity.UserDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
@@ -107,7 +107,6 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL)) {
             return parseResultSet(resultSet);
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }

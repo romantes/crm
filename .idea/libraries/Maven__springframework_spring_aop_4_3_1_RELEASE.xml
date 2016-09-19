@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Maven: springframework:spring-aop:4.3.1.RELEASE">
+    <CLASSES />
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/springframework/spring-aop/4.3.1.RELEASE/spring-aop-4.3.1.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/springframework/spring-aop/4.3.1.RELEASE/spring-aop-4.3.1.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

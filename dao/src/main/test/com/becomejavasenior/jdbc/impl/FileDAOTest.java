@@ -1,6 +1,6 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.*;
+import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.entity.FileDAO;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;

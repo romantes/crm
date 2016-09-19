@@ -13,6 +13,12 @@
           <element id="archive" name="dao-1.0-SNAPSHOT.jar">
             <element id="module-output" name="dao" />
           </element>
+          <element id="archive" name="aspect-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="aspect" />
+          </element>
+          <element id="library" level="project" name="Maven: springframework:spring-aop:4.3.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.9" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.9" />
           <element id="archive" name="model-1.0-SNAPSHOT.jar">
             <element id="module-output" name="model" />
           </element>
@@ -35,23 +41,6 @@
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:19.0" />
-          <element id="library" level="project" name="Maven: com.sparkjava:spark-core:2.2" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.7" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.7.7" />
-          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-server:9.0.2.v20130417" />
-          <element id="library" level="project" name="Maven: org.eclipse.jetty.orbit:javax.servlet:3.0.0.v201112011016" />
-          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-http:9.0.2.v20130417" />
-          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-util:9.0.2.v20130417" />
-          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-io:9.0.2.v20130417" />
-          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-webapp:9.0.2.v20130417" />
-          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-xml:9.0.2.v20130417" />
-          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-servlet:9.0.2.v20130417" />
-          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-security:9.0.2.v20130417" />
-          <element id="library" level="project" name="Maven: com.sparkjava:spark-template-freemarker:2.0.0" />
-          <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.19" />
-          <element id="library" level="project" name="Maven: com.heroku.sdk:heroku-jdbc:0.1.1" />
-          <element id="library" level="project" name="Maven: org.jscience:jscience:4.3.1" />
-          <element id="library" level="project" name="Maven: org.javolution:javolution:5.2.3" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -1,9 +1,9 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.*;
+import com.becomejavasenior.jdbc.entity.*;
+import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.entity.ContactDAO;
 import com.becomejavasenior.jdbc.entity.TagDAO;
-import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;

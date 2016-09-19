@@ -1,7 +1,5 @@
 package com.becomejavasenior.jdbc.entity;
 
-import com.becomejavasenior.entity.Task;
-
 import java.util.Map;
 import java.util.List;
 

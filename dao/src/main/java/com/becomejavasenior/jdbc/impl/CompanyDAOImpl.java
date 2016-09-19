@@ -1,8 +1,8 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.Company;
-import com.becomejavasenior.entity.Tag;
-import com.becomejavasenior.entity.User;
+import com.becomejavasenior.jdbc.entity.Company;
+import com.becomejavasenior.jdbc.entity.Tag;
+import com.becomejavasenior.jdbc.entity.User;
 import com.becomejavasenior.jdbc.entity.CompanyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;

@@ -1,10 +1,10 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.Company;
-import com.becomejavasenior.entity.Contact;
-import com.becomejavasenior.entity.Tag;
-import com.becomejavasenior.jdbc.entity.TagDAO;
+import com.becomejavasenior.jdbc.entity.Company;
+import com.becomejavasenior.jdbc.entity.Contact;
+import com.becomejavasenior.jdbc.entity.Tag;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
+import com.becomejavasenior.jdbc.entity.TagDAO;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
