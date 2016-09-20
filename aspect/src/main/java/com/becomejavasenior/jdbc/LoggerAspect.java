@@ -6,6 +6,9 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 
+import java.util.Arrays;
+import java.util.Date;
+
 
 /**
  * Created by apple on 9/8/16.
@@ -19,17 +22,38 @@ public class LoggerAspect {
 
     @AfterReturning(value = POINTCUT)
     private void logDaoCall(JoinPoint joinPoint) {
-        String methodName = joinPoint.getSignature().getName();
-        Object[] methodArgs = joinPoint.getArgs();
-        log.trace("Method: " + methodName + "Method arguments: " + methodArgs + " ..Was successful ");
+
+        String methodArgs = parseJoinPoint(joinPoint);
+        log.trace(new Date().toString() +
+                getShortClassName(joinPoint) +
+                "." + getShortMethodName(joinPoint) +
+                " (" + methodArgs + ") " +
+                " ..Was successful " );
     }
 
     @AfterThrowing(value=POINTCUT, throwing="exception")
     private void logExeptionDaoCall(JoinPoint joinPoint, Exception exception) {
-        String methodName = joinPoint.getSignature().getName();
-        String methodArgs = joinPoint.getArgs().toString();
-        errLog.warn("Method: " + methodName + "Method arguments: " + methodArgs + " ..Was unsuccessful ");
+        String methodArgs = parseJoinPoint(joinPoint);
+        errLog.warn(new Date().toString() + " " +
+                getShortClassName(joinPoint) +
+                "." + getShortMethodName(joinPoint) +
+                " (" + methodArgs + ") " +
+                " ..Was unsuccessful " );
     }
 
+    private String parseJoinPoint(JoinPoint joinPoint) {
+        Object [] args = joinPoint.getArgs();
+        return Arrays.stream(args).map((obj) -> obj.toString()).reduce((st1, st2) -> st1 + " " + st2).orElse("");
+    }
 
+    private String getShortClassName(JoinPoint joinPoint) {
+        String className = joinPoint.getThis().toString();
+        int idx = className.indexOf('@');
+        String clazz = className.substring(0, idx);
+        return clazz;
+    }
+
+    private String getShortMethodName(JoinPoint joinPoint) {
+        return joinPoint.getSignature().getName();
+    }
 }

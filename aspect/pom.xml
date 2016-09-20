@@ -10,11 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>aspect</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>4.3.1.RELEASE</version>
-        </dependency>
+
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
@@ -26,5 +22,6 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.8.9</version>
         </dependency>
+
     </dependencies>
 </project>
