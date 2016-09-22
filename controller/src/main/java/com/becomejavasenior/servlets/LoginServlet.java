@@ -1,4 +1,4 @@
-package com.becomejavasenior.jdbc.servlets;
+package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.jdbc.entity.User;
 import com.becomejavasenior.jdbc.service.UserService;
@@ -76,10 +76,16 @@ public class LoginServlet extends HttpServlet {
             userName.setSecure(true);
             userName.setMaxAge(MAX_INACTIVE_INTERVAL);
             res.addCookie(userName);
+            Logger.getRootLogger().info("WEB: AUTH: '" + email
+                    + " ' locale : "  + session.getAttribute("lang").toString()
+                    + " logged in");
 
-            Logger.getRootLogger().info("WEB: AUTH: '" + email + "' logged in");
         } else {
-            req.getSession().setAttribute("authMessage", "Предоставлены неверные учетные данные");
+            if (req.getAttribute("javax.servlet.jsp.jstl.fmt.locale.request").toString().equals("ru")) {
+                req.getSession().setAttribute("authMessage", "Предоставлены неверные учетные данные");
+            } else {
+                req.getSession().setAttribute("authMessage", "Incorrect password or login");
+            }
             Logger.getRootLogger().info("WEB: AUTH: login failed for '" + email + "'");
         }
 

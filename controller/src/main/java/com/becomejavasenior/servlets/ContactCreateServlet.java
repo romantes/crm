@@ -1,4 +1,4 @@
-package com.becomejavasenior.jdbc.servlets;
+package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.jdbc.service.ContactService;
 import org.apache.log4j.Logger;
